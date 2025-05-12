@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeicesterBreaks</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" href="images/leicesterbreaks-icon.jpg" type="image/x-icon">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="home.html" class="logo">LeicesterBreaks</a>
+            <div class="nav-links">
+                <a href="gallery.html">Gallery</a>
+                <a href="attractions.html">Attractions</a>
+                <a href="events.html">Events</a>
+                <a href="index.html" class ="sign-out-link">Sign Out</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="attractions-header">
+        <h1>Leicester Attractions</h1>
+        <p>Click 'View Details' to learn more, read what others have said and submit a review.</p>
+    </header>
+
+    <div class="attractions-container">
+        <div class="attractions-grid">
+            <div class="attraction-card">
+                <div class="card-header">
+                    <h2>1. National Space Centre</h2>
+                    <div class="rating">★★★★★</div>
+                </div>
+                <div class="card-image">
+                    <img src="images/attractions-cards-1.jpg" alt="National Space Centre">
+                </div>
+                <div class="card-body">
+                    <div class="card-content">
+                        <p>UK's leading space science centre with interactive exhibits and the iconic Rocket Tower</p>
+                        <a href="attractions-details-1.html" class="card-button">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="attraction-card">
+                <div class="card-header">
+                    <h2>2. King Richard III Visitor Centre</h2>
+                    <div class="rating">★★★★★</div>
+                </div>
+                <div class="card-image">
+                    <img src="images/attractions-cards-2.jpg" alt="King Richard III Visitor Centre">
+                </div>
+                <div class="card-body">
+                    <div class="card-content">
+                        <p>Fascinating exhibition telling the story of King Richard III's life, death, and remarkable discovery</p>
+                        <a href="attractions-details-2.html" class="card-button">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="attraction-card">
+                <div class="card-header">
+                    <h2>3. Bradgate Park</h2>
+                    <div class="rating">★★★★★</div>
+                </div>
+                <div class="card-image">
+                    <img src="images/attractions-cards-3.jpg" alt="Bradgate Park">
+                </div>
+                <div class="card-body">
+                    <div class="card-content">
+                        <p>Beautiful landscape with historic ruins, wildlife, and stunning panoramic views</p>
+                        <a href="attractions-details-3.html" class="card-button">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 LeicesterBreaks. All rights reserved.
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.attraction-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.querySelector('.card-image img').style.transform = 'scale(1.05)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.querySelector('.card-image img').style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

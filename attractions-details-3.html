@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeicesterBreaks</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" href="images/leicesterbreaks-icon.jpg" type="image/x-icon">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="home.html" class="logo">LeicesterBreaks</a>
+            <div class="nav-links">
+                <a href="gallery.html">Gallery</a>
+                <a href="attractions.html">Attractions</a>
+                <a href="events.html">Events</a>
+                <a href="index.html" class ="sign-out-link">Sign Out</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="detail-header">
+        <div class="detail-container">
+            <h1 class="attraction-title">Bradgate Park</h1>
+            <div class="attraction-rating">★★★★★</div>
+            
+            <div class="attraction-info">
+                <span>Newtown Linford, Leicester LE6 0HE</span>
+            </div>
+            
+            <div class="attraction-info">
+                <span>0116 236 2713</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="detail-container">
+        <div class="attraction-image">
+            <img src="images/attractions-details-3.jpg" alt="Bradgate Park">
+        </div>
+
+        <div class="attraction-description">
+           <p>Bradgate Park is a stunning 850-acre park, known for its roaming red and fallow deer, ancient woodlands, and rugged landscapes. Highlights include the dramatic ruins of Bradgate House and the historic Old John Tower, both set against a backdrop of breathtaking natural beauty.</p>
+        </div>
+
+        <div class="attraction-details">
+            <div class="detail-column">
+                <div class="detail-item">
+                    <h4>Opening Hours</h4>
+                    <p>Park: 08:00 - 20:30</p>
+					<p>Café: 10:00 - 17:00</p>
+                    <p>Visitor Centre: 11:00 - 16:00</p>
+                </div>
+                <div class="detail-item">
+                    <h4>Highlights</h4>
+                    <p>Wild Deer Herds</p>
+                    <p>Old John Tower</p>
+                    <p>Ruins of Bradgate House</p>
+                    <p>Scenic Walking Trails</p>
+                </div>
+            </div>
+            <div class="detail-column">
+                <div class="detail-item">
+                    <h4>Facilities</h4>
+                    <p>Visitor Centre</p>
+                    <p>Café</p>
+                    <p>Picnic Areas</p>
+                    <p>Car Parks</p>
+                </div>
+                <div class="detail-item">
+                    <h4>Website</h4>
+                    <p><a href="https://www.bradgatepark.org" target="_blank" style="color: #007bff; text-decoration: none;">www.bradgatepark.org</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="reviews-section">
+            <h2 class="section-title">Reviews</h2>
+            
+            <div class="review-item">
+                <div class="reviewer-name">
+                    <span>Senna</span>
+                    <span class="attraction-rating">★★★★★</span>
+                </div>
+                <p class="review-text">A beautiful natural escape near the city. The deer roam freely and are a delight to observe. The ruins of Bradgate House provide a fascinating historical backdrop. Perfect for a family day out.</p>
+            </div>
+            
+            <div class="review-item">
+                <div class="reviewer-name">
+                    <span>Emma</span>
+                    <span class="attraction-rating">★★★★★</span>
+                </div>
+                <p class="review-text">Stunning park with great walking trails. The views from Old John Tower are spectacular on a clear day. I love visiting in different seasons as the landscape changes dramatically. Autumn is particularly beautiful with the changing colors.</p>
+            </div>
+            
+            <div class="review-item">
+                <div class="reviewer-name">
+                    <span>Dennis</span>
+                    <span class="attraction-rating">★★★★★</span>
+                </div>
+                <p class="review-text">One of Leicestershire's true gems. Great place for walking, wildlife spotting and taking photos. The ancient oak trees are amazing and there's plenty of space so it never feels overcrowded even on busy days.</p>
+            </div>
+        </div>
+
+        <div class="add-review-section" id="reviewForm">
+            <h2 class="section-title">Add Your Review</h2>
+            
+            <form id="addReviewForm">
+                <div class="form-group">
+                    <label for="reviewerName">Your Name</label>
+                    <input type="text" id="reviewerName" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Rating</label>
+                    <div class="star-rating">
+                        <input type="radio" id="star5" name="rating" value="5" required>
+                        <label for="star5">★</label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4">★</label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3">★</label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2">★</label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1">★</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reviewText">Your Review</label>
+                    <textarea id="reviewText" class="form-control" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitReview">Submit Review</button>
+            </form>
+        </div>
+
+        <div class="thank-you" id="thankYouMessage">
+            <h3>Thank you for your review!</h3>
+            <p>Your review has been submitted and will be processed shortly.</p>
+            <a href="home.html" class="back-btn">Back to Home</a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 LeicesterBreaks. All rights reserved.
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('addReviewForm');
+            const reviewForm = document.getElementById('reviewForm');
+            const thankYouMessage = document.getElementById('thankYouMessage');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('reviewerName').value;
+                const rating = document.querySelector('input[name="rating"]:checked');
+                const reviewText = document.getElementById('reviewText').value;
+                
+                if (!name || !rating || !reviewText) {
+                    alert('Please complete all fields before submitting your review.');
+                    return;
+                }
+                
+                reviewForm.style.display = 'none';
+                thankYouMessage.style.display = 'block';
+                
+                thankYouMessage.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeicesterBreaks</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" href="images/leicesterbreaks-icon.jpg" type="image/x-icon">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="home.html" class="logo">LeicesterBreaks</a>
+            <div class="nav-links">
+                <a href="gallery.html">Gallery</a>
+                <a href="attractions.html">Attractions</a>
+                <a href="events.html">Events</a>
+                <a href="index.html" class ="sign-out-link">Sign Out</a>
+            </div>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Discover Leicester</h1>
+            <p>Experience the perfect blend of history and modern culture in the beautiful city of Leicester</p>
+            <a href="#steps" class="cta-button" id="heroCTA">Explore</a>
+        </div>
+    </section>
+    
+    <section id="steps" class="steps">
+        <h2>Plan Your Dream Leicester Vacation</h2>
+        <div class="step-cards">
+            <div class="step-card">
+                <img src="images/gallery-main.jpg" alt="Leicester Gallery">
+                <div class="card-content">
+                    <h3>Leicester Gallery</h3>
+                    <p>View the beauty and culture of the city through the Leicester Gallery</p>
+                    <a href="gallery.html" class="card-button">View Gallery</a>
+                </div>
+            </div>
+            <div class="step-card">
+                <img src="images/attractions-main.jpg" alt="Leicester Attractions">
+                <div class="card-content">
+                    <h3>Leicester Attractions</h3>
+                    <p>Discover the best attractions in Leicester that you simply can't miss!</p>
+                    <a href="attractions.html" class="card-button">See Attractions</a>
+                </div>
+            </div>
+            <div class="step-card">
+                <img src="images/events-main.jpg" alt="Leicester Events">
+                <div class="card-content">
+                    <h3>Events in Leicester</h3>
+                    <p>Browse and book exciting events happening in Leicester during your stay</p>
+                    <a href="events.html" class="card-button">Find Events</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        &copy; 2025 LeicesterBreaks. All rights reserved.
+    </footer>
+    
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            const currentUser = localStorage.getItem('leicesterBreaks_currentUser');
+            if (!currentUser) {
+                window.location.href = 'index.html';
+                return;
+            }
+        });
+        
+        const heroCTA = document.getElementById('heroCTA');
+        const stepsSection = document.getElementById('steps');
+        
+        if (heroCTA && stepsSection) {
+            heroCTA.addEventListener('click', function(e) {
+                e.preventDefault();
+                stepsSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+        
+        window.addEventListener('DOMContentLoaded', (event) => {
+            if (window.location.hash === '#steps') {
+                window.location.hash = '';
+            }
+            
+            const cardImages = document.querySelectorAll('.step-card img');
+            cardImages.forEach(img => {
+                img.addEventListener('load', function() {
+                    if (this.naturalWidth / this.naturalHeight > 1.5) {
+                        this.style.objectPosition = 'center 25%';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

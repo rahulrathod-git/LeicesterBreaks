@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeicesterBreaks</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" href="images/leicesterbreaks-icon.jpg" type="image/x-icon">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="home.html" class="logo">LeicesterBreaks</a>
+            <div class="nav-links">
+                <a href="gallery.html">Gallery</a>
+                <a href="attractions.html">Attractions</a>
+                <a href="events.html">Events</a>
+                <a href="index.html" class ="sign-out-link">Sign Out</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="gallery-header">
+        <h1>Leicester Gallery</h1>
+        <p>Choose from The City, The Countryside and Leicester Exclusive (Holiday and Festival celebrations)</p>
+    </header>
+
+    <div class="gallery-container">
+        <div class="slideshow" id="slideshow" style="width: 100vw; max-width: 100%;">
+            <div class="slide" data-category="city">
+                <img src="images/gallery-city-1.jpg" alt="Leicester City 1">
+            </div>
+            <div class="slide" data-category="city">
+                <img src="images/gallery-city-2.jpg" alt="Leicester City 2">
+            </div>
+            <div class="slide" data-category="city">
+                <img src="images/gallery-city-3.jpg" alt="Leicester City 3">
+            </div>
+            <div class="slide" data-category="city">
+                <img src="images/gallery-city-4.jpg" alt="Leicester City 4">
+            </div>
+            <div class="slide" data-category="city">
+                <img src="images/gallery-city-5.jpg" alt="Leicester City 5">
+            </div>
+            
+            <div class="slide" data-category="countryside">
+                <img src="images/gallery-countryside-1.jpg" alt="Leicester Countryside 1">
+            </div>
+            <div class="slide" data-category="countryside">
+                <img src="images/gallery-countryside-2.jpg" alt="Leicester Countryside 2">
+            </div>
+            <div class="slide" data-category="countryside">
+                <img src="images/gallery-countryside-3.jpg" alt="Leicester Countryside 3">
+            </div>
+            <div class="slide" data-category="countryside">
+                <img src="images/gallery-countryside-4.jpg" alt="Leicester Countryside 4">
+            </div>
+            <div class="slide" data-category="countryside">
+                <img src="images/gallery-countryside-5.jpg" alt="Leicester Countryside 5">
+            </div>
+            
+            <div class="slide" data-category="lei-exclusive">
+                <img src="images/gallery-exclusive-1.jpg" alt="Leicester Exclusive 1">
+            </div>
+            <div class="slide" data-category="lei-exclusive">
+                <img src="images/gallery-exclusive-2.jpg" alt="Leicester Exclusive 2">
+            </div>
+            <div class="slide" data-category="lei-exclusive">
+                <img src="images/gallery-exclusive-3.jpg" alt="Leicester Exclusive 3">
+            </div>
+            
+            <div class="slide-navigation" id="slideNavigation"></div>
+            <div class="slide-arrow prev-slide" id="prevSlide">&lt;</div>
+            <div class="slide-arrow next-slide" id="nextSlide">&gt;</div>
+        </div>
+
+        <div class="filter-container">
+            <select class="filter-dropdown" id="galleryFilter">
+                <option value="city">The City</option>
+                <option value="countryside">The Countryside</option>
+                <option value="lei-exclusive">Leicester Exclusive</option>
+            </select>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 LeicesterBreaks. All rights reserved.
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slideshow = document.getElementById('slideshow');
+            const slides = document.querySelectorAll('.slide');
+            const slideNavigation = document.getElementById('slideNavigation');
+            const prevSlide = document.getElementById('prevSlide');
+            const nextSlide = document.getElementById('nextSlide');
+            const galleryFilter = document.getElementById('galleryFilter');
+            
+            let currentCategory = galleryFilter.value;
+            let activeSlides = [];
+            let currentSlideIndex = 0;
+            let slideshowInterval;
+            
+            function initSlideshow() {
+                activeSlides = Array.from(slides).filter(slide => 
+                    slide.dataset.category === currentCategory
+                );
+                
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                    slide.style.display = 'none';
+                });
+                
+                activeSlides.forEach(slide => {
+                    slide.style.display = 'flex';
+                });
+                
+                if (activeSlides.length > 0) {
+                    currentSlideIndex = 0;
+                    activeSlides[0].classList.add('active');
+                }
+                
+                slideNavigation.innerHTML = '';
+                for (let i = 0; i < activeSlides.length; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('slide-dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => goToSlide(i));
+                    slideNavigation.appendChild(dot);
+                }
+                
+                if (slideshowInterval) {
+                    clearInterval(slideshowInterval);
+                }
+                
+                slideshowInterval = setInterval(nextSlideShow, 5000);
+            }
+            
+            function goToSlide(index) {
+                if (activeSlides.length === 0) return;
+                
+                activeSlides[currentSlideIndex].classList.remove('active');
+                const dots = document.querySelectorAll('.slide-dot');
+                if (dots[currentSlideIndex]) {
+                    dots[currentSlideIndex].classList.remove('active');
+                }
+                
+                currentSlideIndex = index;
+                
+                activeSlides[currentSlideIndex].classList.add('active');
+                if (dots[currentSlideIndex]) {
+                    dots[currentSlideIndex].classList.add('active');
+                }
+                
+                clearInterval(slideshowInterval);
+                slideshowInterval = setInterval(nextSlideShow, 5000);
+            }
+            
+            function nextSlideShow() {
+                if (activeSlides.length <= 1) return;
+                
+                let nextIndex = currentSlideIndex + 1;
+                if (nextIndex >= activeSlides.length) {
+                    nextIndex = 0;
+                }
+                goToSlide(nextIndex);
+            }
+            
+            function prevSlideShow() {
+                if (activeSlides.length <= 1) return;
+                
+                let prevIndex = currentSlideIndex - 1;
+                if (prevIndex < 0) {
+                    prevIndex = activeSlides.length - 1;
+                }
+                goToSlide(prevIndex);
+            }
+            
+            prevSlide.addEventListener('click', prevSlideShow);
+            nextSlide.addEventListener('click', nextSlideShow);
+            
+            galleryFilter.addEventListener('change', function() {
+                currentCategory = this.value;
+                initSlideshow();
+            });
+            
+            initSlideshow();
+        });
+    </script>
+</body>
+</html>

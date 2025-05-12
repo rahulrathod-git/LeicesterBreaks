@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeicesterBreaks</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" href="images/leicesterbreaks-icon.jpg" type="image/x-icon">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html" class="logo">LeicesterBreaks</a>
+        </div>
+    </nav>
+
+    <div class="welcome-section">
+        <h1>Welcome to LeicesterBreaks</h1>
+        <p>Login or Sign up to get started!</p>
+    </div>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="toggle-forms">
+                <button class="toggle-btn active" id="login-toggle">Login</button>
+                <button class="toggle-btn" id="signup-toggle">Sign Up</button>
+            </div>
+            
+            <div class="form-container">
+                <form class="auth-form active" id="login-form">
+                    <div class="form-group">
+                        <label for="login-username">Username</label>
+                        <input type="text" id="login-username" placeholder="Enter your username">
+                        <div class="error-message">Please enter your username</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="Enter your password">
+                        <div class="error-message">Password is required</div>
+                    </div>
+                    
+                    <button type="submit" class="auth-button">Login</button>
+                </form>
+                
+                <form class="auth-form" id="signup-form">
+                    <div class="form-group">
+                        <label for="signup-username">Username</label>
+                        <input type="text" id="signup-username" placeholder="Choose a username">
+                        <div class="error-message">Username is required</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" placeholder="Create a password (8+ characters)">
+                        <div class="error-message">Password must be at least 8 characters</div>
+                    </div>
+                    
+                    <button type="submit" class="auth-button">Sign up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 LeicesterBreaks. All rights reserved.
+    </footer>
+
+    <script>
+        function showLoginForm() {
+            loginToggle.classList.add('active');
+            signupToggle.classList.remove('active');
+            loginForm.classList.add('active');
+            signupForm.classList.remove('active');
+        }
+
+        function showRegisterForm() {
+            signupToggle.classList.add('active');
+            loginToggle.classList.remove('active');
+            signupForm.classList.add('active');
+            loginForm.classList.remove('active');
+        }
+
+        function simpleHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return hash.toString(16);
+        }
+
+        function showError(input, message) {
+            input.parentElement.classList.add('error');
+            const errorMessage = input.nextElementSibling;
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+        }
+
+        function clearError(input) {
+            input.parentElement.classList.remove('error');
+            const errorMessage = input.nextElementSibling;
+            errorMessage.style.display = 'none';
+        }
+
+        function validateLogin() {
+            document.querySelectorAll('.form-group').forEach(group => {
+                group.classList.remove('error');
+            });
+            
+            const username = document.getElementById("login-username");
+            const password = document.getElementById("login-password");
+            let valid = true;
+            
+            if (username.value === "") {
+                showError(username, "Please enter your username");
+                valid = false;
+            } else {
+                clearError(username);
+            }
+            
+            if (password.value === "") {
+                showError(password, "Please enter your password");
+                valid = false;
+            } else {
+                clearError(password);
+            }
+            
+            if (!valid) return;
+            
+            const users = JSON.parse(localStorage.getItem('leicesterBreaks_users') || '{}');
+            const user = users[username.value];
+            
+            if (!user || user.passwordHash !== simpleHash(password.value)) {
+                showError(username, "Invalid username or password");
+                showError(password, "Invalid username or password");
+                return;
+            }
+            
+            localStorage.setItem('leicesterBreaks_currentUser', username.value);
+            window.location.href = "home.html";
+        }
+
+        function registerUser() {
+            document.querySelectorAll('.form-group').forEach(group => {
+                group.classList.remove('error');
+            });
+            
+            const username = document.getElementById("signup-username");
+            const password = document.getElementById("signup-password");
+            let valid = true;
+            
+            if (username.value === "") {
+                showError(username, "Username is required");
+                valid = false;
+            } else {
+                clearError(username);
+            }
+            
+            if (password.value.length < 8) {
+                showError(password, "Password must be at least 8 characters");
+                valid = false;
+            } else {
+                clearError(password);
+            }
+            
+            if (!valid) return;
+            
+            const users = JSON.parse(localStorage.getItem('leicesterBreaks_users') || '{}');
+            if (users[username.value]) {
+                showError(username, "Username already exists");
+                return;
+            }
+            
+            const hashedPwd = simpleHash(password.value);
+            users[username.value] = {
+                username: username.value,
+                passwordHash: hashedPwd
+            };
+            
+            localStorage.setItem('leicesterBreaks_users', JSON.stringify(users));
+            
+            username.value = "";
+            password.value = "";
+            
+            const successMessage = document.createElement('div');
+            successMessage.className = 'success-message';
+            successMessage.textContent = "Registration successful! Please login.";
+            document.querySelector('.auth-card').appendChild(successMessage);
+            
+            setTimeout(() => {
+                successMessage.remove();
+                showLoginForm();
+            }, 3000);
+        }
+
+        const loginToggle = document.getElementById('login-toggle');
+        const signupToggle = document.getElementById('signup-toggle');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+
+        loginToggle.addEventListener('click', showLoginForm);
+        signupToggle.addEventListener('click', showRegisterForm);
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            validateLogin();
+        });
+
+        signupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            registerUser();
+        });
+
+        document.getElementById('login-username').addEventListener('input', function() {
+            if (this.value.trim()) {
+                clearError(this);
+            }
+        });
+
+        document.getElementById('login-password').addEventListener('input', function() {
+            if (this.value.trim()) {
+                clearError(this);
+            }
+        });
+
+        document.getElementById('signup-username').addEventListener('input', function() {
+            if (this.value.trim()) {
+                clearError(this);
+            }
+        });
+
+        document.getElementById('signup-password').addEventListener('input', function() {
+            if (this.value.length >= 8) {
+                clearError(this);
+            }
+        });
+    </script>
+</body>
+</html>

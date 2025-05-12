@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeicesterBreaks</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" href="images/leicesterbreaks-icon.jpg" type="image/x-icon">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="home.html" class="logo">LeicesterBreaks</a>
+            <div class="nav-links">
+                <a href="gallery.html">Gallery</a>
+                <a href="attractions.html">Attractions</a>
+                <a href="events.html">Events</a>
+                <a href="index.html" class ="sign-out-link">Sign Out</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="detail-header">
+        <div class="detail-container">
+            <h1 class="attraction-title">National Space Centre</h1>
+            <div class="attraction-rating">★★★★★</div>
+            
+            <div class="attraction-info">
+                <span>Exploration Drive, Leicester LE4 5NS</span>
+            </div>
+            
+            <div class="attraction-info">
+                <span>0116 261 0261</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="detail-container">
+        <div class="attraction-image">
+            <img src="images/attractions-details-1.jpg" alt="National Space Centre">
+        </div>
+
+        <div class="attraction-description">
+            <p>The National Space Centre is the UK's largest visitor attraction dedicated to space exploration and space science. This award-winning attraction combines interactive exhibits, authentic space artifacts, and the iconic 42m high Rocket Tower to create an out-of-this-world experience for visitors of all ages.</p>
+        </div>
+
+        <div class="attraction-details">
+            <div class="detail-column">
+                <div class="detail-item">
+                    <h4>Opening Hours</h4>
+                    <p>Monday - Sunday: 10:00 - 16:00</p>
+                </div>
+                <div class="detail-item">
+                    <h4>Highlights</h4>
+                    <p>UK's Largest Planetarium</p>
+                    <p>42m Rocket Tower</p>
+                    <p>Interactive Galleries</p>
+                    <p>Space Mission Simulators</p>
+                </div>
+            </div>
+            <div class="detail-column">
+                <div class="detail-item">
+                    <h4>Facilities</h4>
+                    <p>Café & Restaurant</p>
+                    <p>Gift Shop</p>
+                    <p>Over 400 parking spaces</p>
+                    <p>Disabled Access</p>
+                </div>
+                <div class="detail-item">
+                    <h4>Website</h4>
+                    <p><a href="https://www.spacecentre.co.uk" target="_blank" style="color: #007bff; text-decoration: none;">www.spacecentre.co.uk</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="reviews-section">
+            <h2 class="section-title">Reviews</h2>
+            
+            <div class="review-item">
+                <div class="reviewer-name">
+                    <span>Sarah</span>
+                    <span class="attraction-rating">★★★★★</span>
+                </div>
+                <p class="review-text">Amazing experience for the whole family. The rocket tower was breathtaking and the planetarium show was out of this world. Highly recommended for anyone interested in space and science.</p>
+            </div>
+            
+            <div class="review-item">
+                <div class="reviewer-name">
+                    <span>Rachel</span>
+                    <span class="attraction-rating">★★★★★</span>
+                </div>
+                <p class="review-text">One of the best science centers I've visited. Interesting exhibits, knowledgeable staff, and plenty to see and do. Plan to spend the whole day here to make the most of it.</p>
+            </div>
+            
+            <div class="review-item">
+                <div class="reviewer-name">
+                    <span>Rafael</span>
+                    <span class="attraction-rating">★★★★★</span>
+                </div>
+                <p class="review-text">Great exhibits and very educational. My kids loved the interactive displays. The only downside was that it was quite crowded on a weekend. Would suggest visiting on a weekday if possible.</p>
+            </div>
+        </div>
+
+        <div class="add-review-section" id="reviewForm">
+            <h2 class="section-title">Add Your Review</h2>
+            
+            <form id="addReviewForm">
+                <div class="form-group">
+                    <label for="reviewerName">Your Name</label>
+                    <input type="text" id="reviewerName" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Rating</label>
+                    <div class="star-rating">
+                        <input type="radio" id="star5" name="rating" value="5" required>
+                        <label for="star5">★</label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4">★</label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3">★</label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2">★</label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1">★</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reviewText">Your Review</label>
+                    <textarea id="reviewText" class="form-control" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitReview">Submit Review</button>
+            </form>
+        </div>
+
+        <div class="thank-you" id="thankYouMessage">
+            <h3>Thank you for your review!</h3>
+            <p>Your review has been submitted and will be processed shortly.</p>
+            <a href="home.html" class="back-btn">Back to Home</a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 LeicesterBreaks. All rights reserved.
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('addReviewForm');
+            const reviewForm = document.getElementById('reviewForm');
+            const thankYouMessage = document.getElementById('thankYouMessage');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('reviewerName').value;
+                const rating = document.querySelector('input[name="rating"]:checked');
+                const reviewText = document.getElementById('reviewText').value;
+                
+                if (!name || !rating || !reviewText) {
+                    alert('Please complete all fields before submitting your review.');
+                    return;
+                }
+                
+                reviewForm.style.display = 'none';
+                thankYouMessage.style.display = 'block';
+                
+                thankYouMessage.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
